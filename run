@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo docker run --name node_bigstream -v /tmp/data:/tmp/data -p 80:80 -p 19980:19980 -p 19080:19080 -p 19180:19180 -it  bigstream 
