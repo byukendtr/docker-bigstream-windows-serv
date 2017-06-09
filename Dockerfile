@@ -49,7 +49,7 @@ RUN 	apt-get install -y nano
 RUN 	git clone https://github.com/igridproject/node-bigstream.git ~/node-bigstream
 RUN 	npm install --prefix ~/node-bigstream
 
-EXPOSE 19980 19080 19180
+EXPOSE 19980 19080 19180 6379
 
 # start server
 ENTRYPOINT 	rabbitmq-server -detached && \
