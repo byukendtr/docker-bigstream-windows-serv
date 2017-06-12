@@ -1,28 +1,15 @@
 FROM ubuntu
 MAINTAINER R Trisith
 ################# Install packages #############################
-# curl, wget, git
-RUN 	apt-get update && apt-get install -y curl && apt-get install -y wget && apt-get install -y git
+# install curl, wget, git, nano
+RUN 	apt-get update && apt-get install -y curl && apt-get install -y wget && apt-get install -y git && \
+	apt-get install -y nano
 
 # nodeJS
 RUN	curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN	apt-get install -y nodejs
 RUN	apt-get install -y build-essential
 
-# docker
-RUN	apt-get remove docker docker-engine
-RUN	apt-get install -y \
-    	apt-transport-https \
-    	ca-certificates \
-    	curl \
-    	software-properties-common
-RUN	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-RUN	add-apt-repository \
-   	"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   	$(lsb_release -cs) \
-   	stable"
-RUN	apt update
-RUN	apt-get install -y docker-ce
 
 # pm2
 RUN	npm install -y pm2@latest -g
@@ -39,8 +26,9 @@ RUN	wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | \
 RUN	apt-get update
 RUN	apt-get install -y rabbitmq-server
 
-# nano editor
-RUN 	apt-get install -y nano
+# edit redis permanent store
+RUN	sed -i 's/appendonly no/appendonly yes/g' /etc/redis/redis.conf
+
 
 
 ################################################################
@@ -61,6 +49,7 @@ ENTRYPOINT 	rabbitmq-server -detached && \
 		pm2 start ~/node-bigstream/work-jobworker.js && \
 		pm2 reload all && \
 		/bin/bash
+
 
 
 
