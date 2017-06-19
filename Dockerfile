@@ -29,8 +29,6 @@ RUN	apt-get install -y rabbitmq-server
 # edit redis permanent store
 RUN	sed -i 's/appendonly no/appendonly yes/g' /etc/redis/redis.conf
 
-
-
 ################################################################
 
 # big-stream clone

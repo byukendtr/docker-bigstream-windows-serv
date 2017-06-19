@@ -1,0 +1,7 @@
+build - build image from Dockerfile and instantly create container by run image
+exec - execute the container (build required)
+stop - stop container
+
+***************************************
+m1(build only) image from Dockerfile
+m2(run only) - create container

@@ -1,3 +1,0 @@
-#!/bin/bash
-sudo docker start node_bigstream
-sudo docker exec -it node_bigstream /bin/bash
